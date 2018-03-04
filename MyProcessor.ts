@@ -125,7 +125,7 @@ export class LogProcessor {
         console.log("------- now write JSON --------");
         let jsonLog = JSON.stringify(commitsAll, null, 4);
         //console.log(commitsAllJSON);
-        //new OutputFileGenerator(commitsAll).generateFile();
+        new OutputFileGenerator(commitsAll).generateFile();
         console.log("GitLog : END");
         return jsonLog;
     }
