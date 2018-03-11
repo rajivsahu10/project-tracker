@@ -1,6 +1,6 @@
 
-import { app, BrowserWindow, ipcMain } from "electron";
-// const {app, BrowserWindow, ipcMain} = require('Electron'); 
+// import { app, BrowserWindow, ipcMain } from "electron";
+const {app, BrowserWindow, ipcMain} = require('Electron'); 
 import * as path from "path";
 import * as url from "url";
 import { LogProcessor } from "./MyProcessor";
@@ -60,7 +60,8 @@ ipcMain.on('synchronous-message', (event, arg) => {
   console.log("Received 'sysn-msg' with args: " + arg);
   event.returnValue = 'pong :( '
 
-  let gitLogProcessor: LogProcessor = new LogProcessor();  
+  let gitLogProcessor: LogProcessor = new LogProcessor();
+  let commitLogJson : string = gitLogProcessor.start();
   let generatedLog: string = gitLogProcessor.start();
   console.log("Log generated in main process" + generatedLog);
   event.returnValue = generatedLog;
