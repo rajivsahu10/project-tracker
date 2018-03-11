@@ -8,7 +8,7 @@
 //             "type": "node",
 //             "request": "launch",
 //             "name": "Electron Main",
-//             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd",
+//             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
 //             "program": "${workspaceFolder}/main.js",
 //             "protocol": "legacy"
 //         },
