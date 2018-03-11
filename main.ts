@@ -1,6 +1,5 @@
 
-// import { app, BrowserWindow, ipcMain } from "electron";
-const {app, BrowserWindow, ipcMain} = require('Electron'); 
+import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
 import * as url from "url";
 import { LogProcessor } from "./MyProcessor";
@@ -56,14 +55,9 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
-ipcMain.on('synchronous-message', (event, arg) => {
-  console.log("Received 'sysn-msg' with args: " + arg);
-  event.returnValue = 'pong :( '
-
-  let gitLogProcessor: LogProcessor = new LogProcessor();
-  let commitLogJson : string = gitLogProcessor.start();
-  let generatedLog: string = gitLogProcessor.start();
-  console.log("Log generated in main process" + generatedLog);
-  event.returnValue = generatedLog;
-  console.log("Graceful end of listener logic execution");
+ipcMain.on('load-async', (event, arg) => {
+  console.log("Received 'sysn-msg' with args: " + arg);  
+  let gitLogProcessor: LogProcessor = new LogProcessor(event);  
+  gitLogProcessor.start();  
+  console.log("Graceful end of async listener logic execution");
 })

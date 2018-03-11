@@ -41,6 +41,11 @@ class Commit {
 }
 
 export class LogProcessor {
+    private receivedEvent: any;
+    
+    constructor(event: any) {
+        this.receivedEvent = event;
+    }
 
     private processCommitInfo(rawCommit: string): Commit {
         // match commit headers :  [a-zA-Z]*:.*
@@ -131,7 +136,7 @@ export class LogProcessor {
     }
 
     
-    public start() : string {
+    public start() : void {
         console.log("inside start")
         let gitLogCmd : string = 'git -C d:/angular/angularWorkspace/my-first-app log --remotes=origin --numstat --pretty=oneline --date=short -2 --format="AuthorName:%aN%nAuthorEmail:%aE%nAuthorDate:%ad%nSubject:%s"'
         let jsonCommitLog: string = "Empty log ....";
@@ -143,13 +148,13 @@ export class LogProcessor {
                         
             if (stdout != null) {
                 jsonCommitLog = this.processCmdOutput(stdout);
+                this.receivedEvent.sender.send('load-success', jsonCommitLog);
             }
 
             if(stderr != null && stderr.length > 0) {
                 console.log('stderr ', stderr);
             }            
-        });
-        return jsonCommitLog;        
+        });        
     }
 }
 
