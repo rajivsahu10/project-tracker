@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { version } from 'punycode';
 
 @Component({
@@ -6,7 +6,7 @@ import { version } from 'punycode';
   templateUrl: './console-raw.component.html',
   styleUrls: ['./console-raw.component.css']
 })
-export class ConsoleRawComponent implements OnInit, OnChanges, DoCheck {
+export class ConsoleRawComponent implements OnInit, OnChanges {
 
   
   @Input('commitLogJson') commitLog : string = "";
@@ -16,9 +16,6 @@ export class ConsoleRawComponent implements OnInit, OnChanges, DoCheck {
   ngOnInit() {
   }
 
-  ngDoCheck() {
-    console.log("called console-raw-component:ngDoCheck()")
-  }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['commitLogJson']) {
       console.log("ConsoleRawComponent:onChanges:"+ changes['commitLogJson']);
